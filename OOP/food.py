@@ -4,7 +4,7 @@ import pygame
 class Food():
     def __init__(self,windowSize):
         self.name = "Food"
-        self.size = r.randint(2,10)
+        self.size = r.randint(5,8)
         self.pos = [r.randint(50,windowSize[0]-50),self.size/2]
         self.maxY = windowSize[1]
         self.theta = 0

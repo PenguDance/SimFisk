@@ -25,7 +25,9 @@ frozenSharks = [0]
 time = clock.get_time()
 def newFish():
     cfish.append(ClownFish([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(100,100,100),"Fisk",5,windowSize,5,200,50))
-    print("Ny fisk :D")
+    print(f"Ny fisk :D {len(cfish)}")
+def newShark():
+    sharks.append(Sharks([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(255,10,50),"Haj",5,windowSize,1.5,300,150))
 def newFood():
     if len(food) < 5:
         food.append(Food(windowSize))
@@ -40,19 +42,20 @@ def sharkUnfreeze():
     
 def setup():
     for i in range(len(cfish)):
-        newFish()    
+        cfish[i] = ClownFish([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(100,100,100),"Fisk",5,windowSize,5,200,50)
     for i in range(len(sharks)):
         sharks[i] = Sharks([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(255,10,50),"Haj",5,windowSize,1.5,300,150)
-    for i in range(len(food)):
-        food[i] = Food(windowSize)
+    food[0] = Food(windowSize)
 pygame.time.set_timer(fishSpawnEvent, 1000)
 pygame.time.set_timer(sharkFreezeEvent, r.randint(500,2000), loops = 1)
-pygame.time.set_timer(foodSpawnEvent, 1000, loops = 1)
+pygame.time.set_timer(foodSpawnEvent, 100, loops = 1)
 pygame.time.set_timer(hungerEvent, 5000)
 def draw():
     clock.tick(60)
     screen.fill((200, 200, 200))
     for i in range(len(cfish)):
+        if i >= len(cfish):
+            break
         if cfish[i] == 0:
             continue
         if len(food) > 0:
@@ -62,17 +65,15 @@ def draw():
                     food.pop(j)
                     print("Yum")
                     break
+        cfish[i].update(cfish,sharks,food)
+        cfish[i].show(screen)
         for j in range(len(sharks)):
             if cfish[i].checkCol(sharks[j]) == True:
-                cfish[i] = 0
+                cfish.pop(i)
                 print("Yum")
                 sharks[j].eat()
                 break
         
-        if cfish[i] == 0:
-            continue
-        cfish[i].update(cfish,sharks,food)
-        cfish[i].show(screen)
     for i in range(len(sharks)):
         if sharks[i].frozen == False:
             sharks[i].update(cfish,sharks,food)
@@ -87,7 +88,7 @@ def draw():
 #shark1.swim(cfish1)
 #shark1.show(screen)
 # Vis vindhastighed og retning i vinduet
-    text = f"Something"
+    text = f"amount of fishes = {len(cfish)}  amount  of sharks = {len(sharks)}"
     text_surface = font.render(text, True, (0, 0, 0))
     screen.blit(text_surface, (10, 50))
     pygame.display.update()
@@ -112,6 +113,8 @@ while running:
                 if sharks[i].size == 0:
                     sharks.pop(i)
                     break
+            if len(sharks) == 1:
+                newShark()
     draw()
 
 if __name__ == "__main__":
