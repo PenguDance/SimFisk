@@ -19,7 +19,7 @@ pygame.display.set_caption('Flokkesimulation')
 # Font til tekst i vinduet
 font = pygame.font.SysFont("Arial", 36)
 cfish = [0]*100
-sharks = [0]*3
+sharks = [0]*10
 food = [0]
 frozenSharks = [0]
 time = clock.get_time()
@@ -56,8 +56,6 @@ def draw():
     for i in range(len(cfish)):
         if i >= len(cfish):
             break
-        if cfish[i] == 0:
-            continue
         if len(food) > 0:
             for j in range(len(food)):
                 if cfish[i].checkCol(food[j]) == True:

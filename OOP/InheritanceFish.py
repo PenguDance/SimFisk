@@ -39,7 +39,7 @@ class ClownFish(Fish):
         self.nSharks = 0
         self.food = [0,0]
         for i in range(len(cFishes)):
-            if cFishes[i] == self or cFishes[i] == 0:
+            if cFishes[i] == self:
                 continue
             dx = cFishes[i].pos[0]-self.pos[0]
             dy = cFishes[i].pos[1]-self.pos[1]
@@ -124,8 +124,6 @@ class Sharks(Fish):
         self.avgSharks = [0,0]
         self.nSharks = 0
         for i in range(len(cFishes)):
-            if  cFishes[i] == 0:
-                continue
             dx = cFishes[i].pos[0]-self.pos[0]
             dy = cFishes[i].pos[1]-self.pos[1]
             dc = [dx,dy]
