@@ -21,7 +21,7 @@ sharks = [0]*4 # Start array til hajer
 food = [0]      # Start array til mad
 frozenSharks = [0]
 def newFish():
-    cfish.append(ClownFish([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(100,100,100),"Fisk",5,windowSize,5,200,50))
+    cfish.append(ClownFish([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(100,100,100),"Fisk",5,windowSize,5,200,75))
     # Laver en ny fisk med værdierne ([x,y],[x-has,y-has],(r,g,b),"navn",størrelse, [vindue-x,vindue-y], synslængde, personligzone)
     print(f"Ny fisk :D {len(cfish)}")
 def newShark():
@@ -42,7 +42,7 @@ def sharkUnfreeze():
     
 def setup():
     for i in range(len(cfish)):
-        cfish[i] = ClownFish([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(100,100,100),"Fisk",5,windowSize,5,200,50)
+        cfish[i] = ClownFish([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(100,100,100),"Fisk",5,windowSize,5,200,75)
     for i in range(len(sharks)):
         sharks[i] = Sharks([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(255,10,50),"Haj",5,windowSize,1.5,300,150)
     food[0] = Food(windowSize)

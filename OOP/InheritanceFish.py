@@ -18,8 +18,10 @@ class Fish():
         self.length = np.sqrt(self.vel[0]**2 + self.vel[1]**2)
         for i in range(2):
             self.vel[i] = self.speed*self.vel[i]/self.length
-            if self.pos[i] + self.vel[i] <= 0 or self.pos[i] + self.vel[i] >= self.windowSize[i]:
-                self.vel[i] = self.vel[i] * (-1)
+            if self.pos[i] + self.vel[i] <= 50 and self.pos[i] != 0: 
+                self.vel[i] = self.vel[i] + abs(100/(self.pos[i]))
+            elif self.pos[i] + self.vel[i] >= self.windowSize[i]-50 and self.windowSize[i]-self.pos[i] != 0:
+               self.vel[i] = self.vel[i] - abs(100/(self.windowSize[i]-self.pos[i]))
             self.pos[i] = self.pos[i] + self.vel[i]
         #print(f"x: {self.vel[0]}  y: {self.vel[1]}  L: {np.sqrt(self.vel[0]**2 + self.vel[1]**2)}  name: {self.vectors.name}")
     def update(self,cfish,sharks,food):
@@ -117,8 +119,8 @@ class ClownFish(Fish):
                     self.food[i] = self.food[i]/dist
                     # Normaliserer x- og y-afstandene
         for j in range(2):
-            speed[j] = (self.avgFish[j] - self.avgSharks[j]*2 + 3*self.food[j])
-            # Lægger de 3 x- og y-afstande sammen i forholdet, 1:-2:3
+            speed[j] = (4*self.avgFish[j] - self.avgSharks[j]*4 + 3*self.food[j])
+            # Lægger de 3 x- og y-afstande sammen i forholdet, 4:-4:3
         if speed != [0,0]:  # Hvis der er noget i nærheden
             for j in  range(2):
                 speed[j] = speed[j]/np.sqrt(speed[0]**2 + speed[1]**2)
