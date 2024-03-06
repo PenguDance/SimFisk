@@ -25,7 +25,7 @@ def newFish():
     # Laver en ny fisk med værdierne ([x,y],[x-has,y-has],(r,g,b),"navn",størrelse, [vindue-x,vindue-y], hastighed, synslængde, personligzone)
     print(f"Ny fisk :D {len(cfish)}")
 def newShark():
-    sharks.append(Sharks([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(255,10,50),"Haj",5,windowSize,2,300,150))
+    sharks.append(Sharks([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(255,10,50),"Haj",5,windowSize,1.5,300,150))
      # Laver en ny haj med værdierne ([x,y],[x-has,y-has],(r,g,b),"navn",størrelse, [vindue-x,vindue-y], hastighed, synslængde, personligzone)
 def newFood():
     if len(food) < 10:
