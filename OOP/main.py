@@ -82,7 +82,7 @@ def draw():
     for i in range(len(food)): # Går gennem alt mad
         food[i].update()
         food[i].show(screen) # Opdaterer og viser maden
-    text = f"amount of fishes = {len(cfish)}  amount  of sharks = {len(sharks)}"
+    text = f"amount of fish = {len(cfish)}  amount  of sharks = {len(sharks)}"
     text_surface = font.render(text, True, (0, 0, 0))
     screen.blit(text_surface, (10, 50))
     # Tekst der viser antallet af fisk og hajer

@@ -22,8 +22,8 @@ class Fish():
                 self.vel[i] = self.vel[i] * (-1)
             self.pos[i] = self.pos[i] + self.vel[i]
         #print(f"x: {self.vel[0]}  y: {self.vel[1]}  L: {np.sqrt(self.vel[0]**2 + self.vel[1]**2)}  name: {self.vectors.name}")
-    def update(self,cFishes,sharks,food):
-        self.setVel(cFishes,sharks,food)
+    def update(self,cfish,sharks,food):
+        self.setVel(cfish,sharks,food)
         self.move()
     def show(self,screen):
         pygame.draw.circle(screen,self.color,self.pos,self.size)
@@ -31,30 +31,30 @@ class Fish():
 class ClownFish(Fish):
     def __init__(self, pos, len, color, name, size, windowSize,speed,vis,near):
         super().__init__(pos, len, color, name, size, windowSize,speed, vis, near)
-    def setVel(self,cFishes,sharks,food):
+    def setVel(self,cfish,sharks,food):
         speed = [0,0]
         self.avgFish = [0,0]
         self.nFish = 0
         self.avgSharks = [0,0]
         self.nSharks = 0
         self.food = [0,0]
-        for i in range(len(cFishes)): # Går gennem alle fisk
-            if cFishes[i] == self: # Hopper fisken over hvis det er den selv
+        for i in range(len(cfish)): # Går gennem alle fisk
+            if cfish[i] == self: # Hopper fisken over hvis det er den selv
                 continue
-            dx = cFishes[i].pos[0]-self.pos[0] 
-            dy = cFishes[i].pos[1]-self.pos[1]
+            dx = cfish[i].pos[0]-self.pos[0] 
+            dy = cfish[i].pos[1]-self.pos[1]
             dc = [dx,dy]
             # Angiver x- og y-afstande  mellem fiskene
             dist = np.sqrt(dx**2 + dy**2)
             # Angiver den samlede afstand mellem fiskene
-            if dist > self.vis + self.size + cFishes[i].size: # Hvis afstanden mellem fiskene er længere end fiskens synslængde sprænges fisken over
+            if dist > self.vis + self.size + cfish[i].size: # Hvis afstanden mellem fiskene er længere end fiskens synslængde sprænges fisken over
                 continue
 
-            if dist > self.near + self.size + cFishes[i].size: # Tjekker om den anden fisk er uden for fiskens personligezone
+            if dist > self.near + self.size + cfish[i].size: # Tjekker om den anden fisk er uden for fiskens personligezone
                 for j in range(2):
                     self.avgFish[j] += dc[j]
                     # Lægger x- og y-afstandene til en liste, der indeholder alle x- og y-afstande
-            if dist <= self.near + self.size + cFishes[i].size: # Hvis fisken er indenfor den anden fisks personlige zone
+            if dist <= self.near + self.size + cfish[i].size: # Hvis fisken er indenfor den anden fisks personlige zone
                 for j in range(2):
                     self.avgFish[j] -= 5*dc[j]
                     # Trækker 5*gange x- og y-afstande fra de samlagte afstande
@@ -141,19 +141,19 @@ class Sharks(Fish):
         super().__init__(pos, len, color, name, size, windowSize, speed, vis, near)
         self.name = name
         self.frozen = False
-    def setVel(self,cFishes,sharks,food):
+    def setVel(self,cfish,sharks,food):
         speed = [0,0]
         self.avgFish = [0,0]
         self.nFish = 0
         self.avgSharks = [0,0]
         self.nSharks = 0
-        for i in range(len(cFishes)): # Går gennem alle fisk
-            dx = cFishes[i].pos[0]-self.pos[0]
-            dy = cFishes[i].pos[1]-self.pos[1]
+        for i in range(len(cfish)): # Går gennem alle fisk
+            dx = cfish[i].pos[0]-self.pos[0]
+            dy = cfish[i].pos[1]-self.pos[1]
             dc = [dx,dy]
             dist = np.sqrt(dx**2 + dy**2)
             # Finder x- og y-afstand og den samlede afstand til fisken
-            if dist > self.vis + self.size + cFishes[i].size: # Tjekker om fisken er indenfor hajens synslængde
+            if dist > self.vis + self.size + cfish[i].size: # Tjekker om fisken er indenfor hajens synslængde
                 continue
             for j in range(2):
                 self.avgFish[j] += 5*dc[j] # Lægger 5 * fiskens x- og y-afstand til en liste
