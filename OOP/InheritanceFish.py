@@ -47,14 +47,14 @@ class ClownFish(Fish):
             # Angiver x- og y-afstande  mellem fiskene
             dist = np.sqrt(dx**2 + dy**2)
             # Angiver den samlede afstand mellem fiskene
-            if dist > self.vis: # Hvis afstanden mellem fiskene er længere end fiskens synslængde sprænges fisken over
+            if dist > self.vis + self.size + cFishes[i].size: # Hvis afstanden mellem fiskene er længere end fiskens synslængde sprænges fisken over
                 continue
 
-            if dist > self.near: # Tjekker om den anden fisk er uden for fiskens personligezone
+            if dist > self.near + self.size + cFishes[i].size: # Tjekker om den anden fisk er uden for fiskens personligezone
                 for j in range(2):
                     self.avgFish[j] += dc[j]
                     # Lægger x- og y-afstandene til en liste, der indeholder alle x- og y-afstande
-            if dist <= self.near: # Hvis fisken er indenfor den anden fisks personlige zone
+            if dist <= self.near + self.size + cFishes[i].size: # Hvis fisken er indenfor den anden fisks personlige zone
                 for j in range(2):
                     self.avgFish[j] -= 5*dc[j]
                     # Trækker 5*gange x- og y-afstande fra de samlagte afstande
@@ -76,7 +76,7 @@ class ClownFish(Fish):
             dc = [dx,dy]
             dist = np.sqrt(dx**2 + dy**2)
             # Finder x- og y-afstanden fra fisken til en haj, samt den samlede afstand
-            if dist-sharks[i].size > self.vis: # Tjekker om fisken er udenfor det synlige område
+            if dist-sharks[i].size > self.vis + self.size: # Tjekker om fisken er udenfor det synlige område
                 continue
             for j in range(2):
                 self.avgSharks[j] += dc[j]
@@ -100,7 +100,7 @@ class ClownFish(Fish):
                 dy = food[i].pos[1]-self.pos[1]
                 dist = np.sqrt(dx**2 + dy**2)
                 # Finder x- og y afstanden til maden, samt den samlede afstand
-                if dist > 2*self.vis: # Hvis maden er udenfor den dobbelte fiskesynslængde
+                if dist > 2*self.vis + self.size: # Hvis maden er udenfor den dobbelte fiskesynslængde
                     continue
                 if self.food == [0,0]: # Hvis der er ikke er valgt mad endnu
                     self.food = [dy,dx] # Angiver nærmeste mads x- og y-afstand
@@ -153,7 +153,7 @@ class Sharks(Fish):
             dc = [dx,dy]
             dist = np.sqrt(dx**2 + dy**2)
             # Finder x- og y-afstand og den samlede afstand til fisken
-            if dist > self.vis: # Tjekker om fisken er indenfor hajens synslængde
+            if dist > self.vis + self.size + cFishes[i].size: # Tjekker om fisken er indenfor hajens synslængde
                 continue
             for j in range(2):
                 self.avgFish[j] += 5*dc[j] # Lægger 5 * fiskens x- og y-afstand til en liste
@@ -176,7 +176,7 @@ class Sharks(Fish):
             dc = [dx,dy]
             dist = np.sqrt(dx**2 + dy**2)
             # Finder x- og y-afstanden samt den samlede afstand
-            if dist > self.near: # Hvis hajen er udenfor hajens synslængde
+            if dist > self.near + self.size + sharks[i].size: # Hvis hajen er udenfor hajens personlige zone
                 continue
             for j in range(2):
                 self.avgSharks[j] += dc[j]
