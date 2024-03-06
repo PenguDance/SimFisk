@@ -119,8 +119,8 @@ class ClownFish(Fish):
                     self.food[i] = self.food[i]/dist
                     # Normaliserer x- og y-afstandene
         for j in range(2):
-            speed[j] = (4*self.avgFish[j] - self.avgSharks[j]*4 + 3*self.food[j])
-            # Lægger de 3 x- og y-afstande sammen i forholdet, 4:-4:3
+            speed[j] = (4*self.avgFish[j] - self.avgSharks[j]*4 + 6*self.food[j])
+            # Lægger de 3 x- og y-afstande sammen i forholdet, 4:-4:6
         if speed != [0,0]:  # Hvis der er noget i nærheden
             for j in  range(2):
                 speed[j] = speed[j]/np.sqrt(speed[0]**2 + speed[1]**2)

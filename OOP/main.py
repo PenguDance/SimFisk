@@ -22,15 +22,15 @@ food = [0]      # Start array til mad
 frozenSharks = [0]
 def newFish():
     cfish.append(ClownFish([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(100,100,100),"Fisk",5,windowSize,5,200,75))
-    # Laver en ny fisk med værdierne ([x,y],[x-has,y-has],(r,g,b),"navn",størrelse, [vindue-x,vindue-y], synslængde, personligzone)
+    # Laver en ny fisk med værdierne ([x,y],[x-has,y-has],(r,g,b),"navn",størrelse, [vindue-x,vindue-y], hastighed, synslængde, personligzone)
     print(f"Ny fisk :D {len(cfish)}")
 def newShark():
-    sharks.append(Sharks([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(255,10,50),"Haj",5,windowSize,1.5,300,150))
-     # Laver en ny haj med værdierne ([x,y],[x-has,y-has],(r,g,b),"navn",størrelse, [vindue-x,vindue-y], synslængde, personligzone)
+    sharks.append(Sharks([r.randint(0,windowSize[0]),r.randint(0,windowSize[1])],[(r.randint(0,200)-100)/100,(r.randint(0,200)-100)/100],(255,10,50),"Haj",5,windowSize,2,300,150))
+     # Laver en ny haj med værdierne ([x,y],[x-has,y-has],(r,g,b),"navn",størrelse, [vindue-x,vindue-y], hastighed, synslængde, personligzone)
 def newFood():
-    if len(food) < 5:
+    if len(food) < 10:
         food.append(Food(windowSize))
-    # Laver mere mad, hvis der er mindre end 5 stykker mad    
+    # Laver mere mad, hvis der er mindre end 10 stykker mad    
 def sharkFreeze():
     x = r.randint(0,len(sharks)-1) # Finder en tilfældig haj
     sharks[x].freeze() # Fryser hajen
