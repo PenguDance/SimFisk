@@ -17,7 +17,7 @@ screen = pygame.display.set_mode((windowSize[0],windowSize[1])) # Laver kanvas
 pygame.display.set_caption('Flokkesimulation') # Navngiver programnavn
 font = pygame.font.SysFont("Arial", 36) # Font til tekst i vinduet
 cfish = [0]*100 # Start array til fisk
-sharks = [0]*10 # Start array til hajer
+sharks = [0]*4 # Start array til hajer
 food = [0]      # Start array til mad
 frozenSharks = [0]
 def newFish():
